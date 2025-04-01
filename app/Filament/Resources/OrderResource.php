@@ -273,7 +273,7 @@ class OrderResource extends Resource
     {
         return [
             //
-            // AddressRelationManager::class
+            AddressRelationManager::class
         ];
     }
 
