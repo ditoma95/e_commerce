@@ -30,6 +30,7 @@ use Filament\Tables\Filters\SelectFilter;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
@@ -175,6 +176,16 @@ class ProductResource extends Resource
         ];
     }
 
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return static::getModel()::count() > 2 ? 'success' : 'primary';
+    }
     public static function getPages(): array
     {
         return [

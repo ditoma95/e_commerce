@@ -28,6 +28,7 @@ use Illuminate\Support\Str;
 class BrandResource extends Resource
 {
     protected static ?string $model = Brand::class;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -106,6 +107,16 @@ class BrandResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return static::getModel()::count() > 2 ? 'success' : 'primary';
     }
     
 

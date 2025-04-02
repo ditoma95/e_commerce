@@ -32,6 +32,8 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -64,6 +66,16 @@ class CategoryResource extends Resource
                 ->default(true)
             ])
         ]);
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return static::getModel()::count() > 2 ? 'success' : 'primary';
     }
 
     public static function table(Table $table): Table
