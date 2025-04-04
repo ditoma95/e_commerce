@@ -12,7 +12,7 @@
                     @foreach($categories as $category)
                     <li wire:key=" {{ $category->id }}">
                         <label for="{{ $category->slug }}" class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="{{ $category->slug }}" value="{{ $category->id }}" class="rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800">
+                            <input type="checkbox" wire:model.live="selectd_categories"  id="{{ $category->slug }}" value="{{ $category->id }}" class="rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800">
                             <span class="text-gray-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">{{$category->name }}</span>
                         </label>
                     </li>
