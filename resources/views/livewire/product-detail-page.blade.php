@@ -52,23 +52,46 @@
                             <label for=""
                                 class="w-full pb-1 text-xl font-semibold text-gray-700 border-b border-blue-300 dark:border-gray-600 dark:text-gray-400">Quantity</label>
                             <div class="relative flex flex-row w-full h-10 mt-6 bg-transparent rounded-lg">
-                                <button
+                                <button wire:click='decreaseQty'
                                     class="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-400">
                                     <span class="m-auto text-2xl font-thin">-</span>
                                 </button>
-                                <input type="number" readonly
+                                <input type="number" readonly wire:model.live='quantity'
                                     class="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"
                                     placeholder="1">
-                                <button
+                                <button wire:click='increaseQty'
                                     class="w-20 h-full text-gray-600 bg-gray-300 rounded-r outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-gray-400 dark:bg-gray-900 hover:text-gray-700 hover:bg-gray-400">
                                     <span class="m-auto text-2xl font-thin">+</span>
                                 </button>
                             </div>
                         </div>
                         <div class="flex flex-wrap items-center gap-4">
-                            <button
-                                class="w-full p-4 bg-blue-500 rounded-md lg:w-2/5 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-700">
-                                Add to cart</button>
+                            <button wire:click='addToCart({{ $product->id }})'
+                                class="w-full p-4 bg-blue-500 rounded-md lg:w-2/5 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 cursor-pointer dark:hover:bg-blue-700">
+                            
+                                <div class="flex items-center justify-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="w-4 h-4 bi bi-cart3" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 
+                                                 .485.379L2.89 3H14.5a.5.5 0 0 1 
+                                                 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 
+                                                 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 
+                                                 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 
+                                                 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 
+                                                 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 
+                                                 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 
+                                                 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 
+                                                 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
+                                        </path>
+                                    </svg>
+                            
+                                    <div>
+                                        <span wire:loading.remove>Add to Cart</span> 
+                                        <span wire:loading wire:target='addToCart({{ $product->id }})'>Adding…</span>
+                                    </div>
+                                </div>
+                            </button>
+                            
                         </div>
                     </div>
                 </div>
