@@ -69,7 +69,7 @@
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 md:grid-cols-2">
               @foreach ($brands as $brand)
                 <div class="bg-white rounded-lg shadow-md dark:bg-gray-700" wire:key=" {{ $brand->id }} ">
-                  <a href="#" class="block">
+                  <a href="/products?selected_brands[0]={{ $brand->id }}" class="block">
                     <img src="{{ url('storage', $brand->image) }}" alt="{{ $brand->name }}" class="object-cover w-full h-64 rounded-t-lg">
                   </a>
                   <div class="p-5 text-center">
@@ -106,7 +106,7 @@
         <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
               @foreach ($categories as $cate)
-                <a  wire:key=" {{ $cate->id }}" class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
+                <a  wire:key=" {{ $cate->id }}" href="/products?selected_categories[0]={{ $cate->id }}" class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
                   <div class="p-4 md:p-5">
                     
                     <div class="flex justify-between items-center">
