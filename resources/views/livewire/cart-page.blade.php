@@ -122,9 +122,9 @@
         
         <!-- Checkout Button -->
         @if(count($cart_items) > 0)
-        <button class="mt-6 w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium py-3 px-4 rounded-md shadow-sm transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+        <a href="/checkout" class="mt-6 w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium py-3 px-4 rounded-md shadow-sm transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
           Passer la commande
-        </button>
+        </a>
         
         <!-- Secure Payment Info -->
         <div class="mt-4 flex items-center justify-center text-sm text-gray-500">
