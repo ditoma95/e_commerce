@@ -7,7 +7,7 @@
             <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Mot de passe oublié ?</h1>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Vous vous souvenez de votre mot de passe ?
-              <a href="/login"
+              <a wire:navigate href="/login"
                 class="font-medium text-blue-600 decoration-2 hover:underline dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                 Connectez-vous ici
               </a>
