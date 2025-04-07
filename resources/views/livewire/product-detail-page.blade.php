@@ -86,7 +86,7 @@
                                     </svg>
                             
                                     <div>
-                                        <span wire:loading.remove>Add to Cart</span> 
+                                        <span wire:loading.remove wire:target='addToCart({{ $product->id }})'>Add to Cart</span> 
                                         <span wire:loading wire:target='addToCart({{ $product->id }})'>Adding…</span>
                                     </div>
                                 </div>
