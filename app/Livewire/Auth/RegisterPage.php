@@ -30,10 +30,13 @@ class RegisterPage extends Component
         ]);
 
         //login
-        auth()->login($user);
+        // auth()->login($user);
 
         //redirect
-        return redirect()->intended();
+        // return redirect()->intended();
+        // Redirection vers la page de connexion avec un message de succès
+        session()->flash('success', 'Votre compte a été créé avec succès. Veuillez vous connecter.');
+        return redirect()->route('login');
     }
 
 

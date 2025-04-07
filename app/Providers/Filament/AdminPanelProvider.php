@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            // ->login()
             // ->loginRouteSlug('login')
             // ->registrationRouteSlug('register')
             // ->passwordResetRoutePrefix('password-reset')
