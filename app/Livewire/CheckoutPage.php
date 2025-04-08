@@ -22,6 +22,13 @@ class CheckoutPage extends Component
     public $zip_code;
     public $payment_method;
 
+    public function mount(){
+        $cart_items = CartManagement::getCartItemsFromCookie();
+        if (count($cart_items) == 0) {
+            return redirect('/products');
+        }
+    }
+
 
     public function placeOrder(){
         $this->validate([
@@ -88,6 +95,14 @@ class CheckoutPage extends Component
         }else{
             $redirect_url = route('success');
         }
+
+        $order->save();
+        $address->order_id = $order->id;
+        $address->save();
+        $order->items()->createMany($cart_items);
+        CartManagement::clearCartItems();
+        return redirect($redirect_url);
+
     }
 
     public function render()
