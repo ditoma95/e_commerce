@@ -4,7 +4,8 @@
     <nav class="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8" aria-label="Main navigation">
       <div class="relative md:flex md:items-center md:justify-between">
         <div class="flex items-center justify-between">
-          <a class="flex-none text-xl font-semibold dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+          <a wire:navigate
+            class="flex-none text-xl font-semibold dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
             href="/" aria-label="TemApp - Home">
             TemApp
           </a>
@@ -64,53 +65,51 @@
               @auth
               <!-- Dropdown utilisateur connecté -->
               <div class="hs-dropdown [--strategy:static] md:[--strategy:absolute] [--adaptive:none] py-3 md:py-6"
-                   x-data="{ open: false }" @click.away="open = false" @keydown.escape="open = false">
-                  <button type="button"
-                          class="flex items-center w-full  cursor-pointer  text-gray-500 hover:text-gray-400 font-medium dark:text-gray-400 dark:hover:text-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-600"
-                          @click="open = !open"
-                          aria-haspopup="true"
-                          :aria-expanded="open">
-                      <span class="mr-1 cursor-pointer outline-none border-none p-1">{{ auth()->user()->name }}</span>
-                      <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600" width="16" height="16"
-                           viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                      </svg>
-                  </button>
-              
-                  <div x-show="open" x-transition:enter="transition ease-out duration-200"
-                       x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                       x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100"
-                       x-transition:leave-end="opacity-0 scale-95"
-                       class="hs-dropdown-menu md:w-48 w-full z-10 bg-white md:shadow-md rounded-lg p-2 dark:bg-gray-800 md:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full md:border-gray-200 before:-top-5 before:left-0 before:w-full before:h-5 hidden md:block"
-                       :class="{'block': open, 'hidden': !open}">
-                      <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                         href="#">
-                          Profile
-                      </a>
-                      <a wire:navigate class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="/logout">
-                        Logout
-                      </a>
-                     
-                  </div>
+                x-data="{ open: false }" @click.away="open = false" @keydown.escape="open = false">
+                <button type="button"
+                  class="flex items-center w-full cursor-pointer text-gray-700 hover:text-gray-600 font-medium dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  @click="open = !open" aria-haspopup="true" :aria-expanded="open">
+                  <span class="mr-2 text-sm font-semibold">{{ auth()->user()->name }}</span>
+                  <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600 dark:text-gray-300" width="16"
+                    height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </button>
+
+                <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-95"
+                  class="hs-dropdown-menu md:w-48 w-full z-10 bg-white md:shadow-lg rounded-lg p-3 dark:bg-gray-800 md:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full md:border-gray-200 before:-top-5 before:left-0 before:w-full before:h-5 hidden md:block"
+                  :class="{'block': open, 'hidden': !open}">
+                  <a wire:navigate
+                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                    href="#">
+                    Profile
+                  </a>
+                  <a wire:navigate
+                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                    href="/logout">
+                    Logout
+                  </a>
+                </div>
               </div>
               @else
               <!-- Bouton de connexion pour les visiteurs -->
               <div class="py-3 md:py-6">
-                  <a wire:navigate
-                     class="{{ request()->is('login') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-gray-400' }} inline-flex items-center gap-x-2 text-sm font-semibold hover:text-gray-400 dark:hover:text-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-600"
-                     href="/login"
-                     aria-label="Login">
-                      <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                          <circle cx="12" cy="7" r="4"/>
-                      </svg>
-                      Log in
-                  </a>
+                <a wire:navigate
+                  class="{{ request()->is('login') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-gray-400' }} inline-flex items-center gap-x-2 text-sm font-semibold hover:text-gray-400 dark:hover:text-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-600"
+                  href="/login" aria-label="Login">
+                  <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  Log in
+                </a>
               </div>
               @endauth
-
             </div>
           </div>
         </div>
