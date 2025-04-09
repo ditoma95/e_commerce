@@ -34,18 +34,81 @@
                 <!-- End Col -->
 
                 <div class="relative ms-4">
-                    <img class="w-full rounded-md"
-                        src="https://img.freepik.com/vecteurs-libre/illustration-concept-page-web-commerce-electronique_114360-8204.jpg?t=st=1743666571~exp=1743670171~hmac=3fdd4d0cbf9118020307c7127e1f7c5a14c18fa2955e9c8a065fa54097f4e91d&w=826"
-                        alt="Image Description">
-                    <div
-                        class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0">
+                  <div x-data="{
+                    slides: [
+                        {
+                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/aspect-slide-1.webp',
+                            imgAlt: 'New collection - ride the wave of excitement.',
+                        },
+                        {
+                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/aspect-slide-2.webp',
+                            imgAlt: 'Up to 30% discount, gear up for adventure.',
+                        },
+                        {
+                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/aspect-slide-3.webp',
+                            imgAlt: '30% off all surfing essentials, ride like a pro.',
+                        },
+                    ],
+                    currentSlideIndex: 1,
+                    previous() {
+                        if (this.currentSlideIndex > 1) {
+                            this.currentSlideIndex = this.currentSlideIndex - 1
+                        } else {
+                            this.currentSlideIndex = this.slides.length
+                        }
+                    },
+                    next() {
+                        if (this.currentSlideIndex < this.slides.length) {
+                            this.currentSlideIndex = this.currentSlideIndex + 1
+                        } else {
+                            this.currentSlideIndex = 1
+                        }
+                    },
+                    autoSlide() {
+                        setInterval(() => {
+                            this.next();
+                        }, 3000); // 1 seconde
+                    },
+                }" x-init="autoSlide()" class="relative w-full overflow-hidden">
+                    <!-- previous button -->
+                    <button type="button" class="absolute left-5 top-1/2 z-20 flex rounded-full -translate-y-1/2 items-center justify-center bg-surface/40 p-2 text-on-surface transition hover:bg-surface/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 dark:bg-surface-dark/40 dark:text-on-surface-dark dark:hover:bg-surface-dark/60 dark:focus-visible:outline-primary-dark" aria-label="previous slide" x-on:click="previous()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="3" class="size-5 md:size-6 pr-0.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                        </svg>
+                    </button>
+                
+                    <!-- next button -->
+                    <button type="button" class="absolute right-5 top-1/2 z-20 flex rounded-full -translate-y-1/2 items-center justify-center bg-surface/40 p-2 text-on-surface transition hover:bg-surface/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 dark:bg-surface-dark/40 dark:text-on-surface-dark dark:hover:bg-surface-dark/60 dark:focus-visible:outline-primary-dark" aria-label="next slide" x-on:click="next()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="3" class="size-5 md:size-6 pl-0.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </button>
+                   
+                    <!-- slides -->
+                    <div class="relative aspect-3/1 w-full">
+                        <template x-for="(slide, index) in slides">
+                            <div x-cloak x-show="currentSlideIndex == index + 1" class="absolute inset-0" x-transition.opacity.duration.700ms>
+                                <img class="absolute w-full h-full inset-0 object-cover text-on-surface dark:text-on-surface-dark" x-bind:src="slide.imgSrc" x-bind:alt="slide.imgAlt" />
+                            </div>
+                        </template>
                     </div>
+                    
+                    <!-- indicators -->
+                    <div class="absolute rounded-radius bottom-3 md:bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-4 md:gap-3 bg-surface/75 px-1.5 py-1 md:px-2 dark:bg-surface-dark/75" role="group" aria-label="slides" >
+                        <template x-for="(slide, index) in slides">
+                            <button class="size-2 rounded-full transition bg-on-surface dark:bg-on-surface-dark" x-on:click="currentSlideIndex = index + 1" x-bind:class="[currentSlideIndex === index + 1 ? 'bg-on-surface dark:bg-on-surface-dark' : 'bg-on-surface/50 dark:bg-on-surface-dark/50']" x-bind:aria-label="'slide ' + (index + 1)"></button>
+                        </template>
+                    </div>
+                </div>
+                
                 </div>
                 <!-- End Col -->
             </div>
             <!-- End Grid -->
         </div>
     </section>
+
+    {{-- ------------------------------------------------------------------------------------------- --}}
 
     <!-- Popular Brands Section -->
     <section class="py-20 bg-white dark:bg-gray-800">
