@@ -23,7 +23,7 @@ class LoginPage extends Component
             return;
         }
 
-        return redirect('/'); // <-- ici redirection forcée vers la page d'accueil
+        return redirect('/'); 
     }
 
     public function render()
