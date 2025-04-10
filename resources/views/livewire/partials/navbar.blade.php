@@ -64,6 +64,12 @@
               <!-- Dropdown menu -->
               @auth
               <!-- Dropdown utilisateur connecté -->
+
+
+              <a class="{{ request()->is('admin') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-gray-400' }} font-medium hover:text-gray-400 py-3 md:py-6 dark:hover:text-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-600"
+                href="/admin"> Panel</a>
+
+
               <div class="hs-dropdown [--strategy:static] md:[--strategy:absolute] [--adaptive:none] py-3 md:py-6"
                 x-data="{ open: false }" @click.away="open = false" @keydown.escape="open = false">
                 <button type="button"
