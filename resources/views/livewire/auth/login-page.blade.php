@@ -7,11 +7,11 @@
             <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Don't have an account yet?
-              <a wire:navigate
-                class="font-medium text-blue-600 decoration-2 hover:underline dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                href="/register">
+              <a href="/register"
+                class="font-medium text-blue-600 decoration-2 hover:underline dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                 Sign up here
               </a>
+
             </p>
           </div>
 
@@ -21,9 +21,9 @@
           <form wire:submit.prevent='save'>
 
             @if (session('error'))
-              <div class="p-4 mt-2 mb-4 text-sm text-white bg-red-500 rounded-lg" role="alert">
-                {{ session('error') }}
-              </div>
+            <div class="p-4 mt-2 mb-4 text-sm text-white bg-red-500 rounded-lg" role="alert">
+              {{ session('error') }}
+            </div>
             @endif
 
 
@@ -55,9 +55,13 @@
               <div>
                 <div class="flex items-center justify-between">
                   <label for="password" class="block mb-2 text-sm dark:text-white">Password</label>
-                  <a wire:navigate
-                    class="text-sm font-medium text-blue-600 decoration-2 hover:underline dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    href="/forgot">Forgot password?</a>
+                  <a
+                  href="/forgot"
+                  class="text-sm font-medium text-blue-600 decoration-2 hover:underline dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                >
+                  Forgot password?
+                </a>
+                
                 </div>
                 <div class="relative">
                   <input type="password" id="password" wire:model="password"
